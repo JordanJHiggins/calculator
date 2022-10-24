@@ -48,6 +48,7 @@ function add(numOne, numTwo) {
   //   displayValue = sum;
   displayValue.push(sum);
   //   display.innerHTML = sum;
+  numberclear();
   return sum;
 }
 
@@ -56,6 +57,7 @@ function subtract(numOne, numTwo) {
   //   displayValue = sum;
   displayValue.push(sum);
   //   display.innerHTML = sum;
+  numberclear();
   return sum;
 }
 
@@ -64,6 +66,7 @@ function multiply(numOne, numTwo) {
   //   displayValue = sum;
   displayValue.push(sum);
   //   display.innerHTML = sum;
+  numberclear();
   return sum;
 }
 
@@ -72,6 +75,7 @@ function divide(numOne, numTwo) {
   //   displayValue = sum;
   displayValue.push(sum);
   //   display.innerHTML = sum;
+  numberclear();
   return sum;
 }
 
@@ -80,6 +84,11 @@ function runningTotal() {
     return acc + currentVal;
   }, 0);
   return total;
+}
+
+function numberclear() {
+  leftNumber = 0;
+  rightNumber = 0;
 }
 
 displayWindow();
