@@ -5,7 +5,7 @@ const numberButtons = document.querySelector(".numButtonsContainer");
 const operationButtons = document.querySelector(".operationButtonContainer");
 const operateButton = document.querySelector(".operateButtonContainer");
 
-let displayValue = 0;
+let displayValue = [0];
 let leftNumber = 0;
 let operator = "";
 let rightNumber = 0;
@@ -45,27 +45,41 @@ function displayWindow() {
 
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
-  display.innerHTML = sum;
+  //   displayValue = sum;
+  displayValue.push(sum);
+  //   display.innerHTML = sum;
   return sum;
 }
 
 function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
-
-  display.innerHTML = sum;
+  //   displayValue = sum;
+  displayValue.push(sum);
+  //   display.innerHTML = sum;
   return sum;
 }
 
 function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
-  display.innerHTML = sum;
+  //   displayValue = sum;
+  displayValue.push(sum);
+  //   display.innerHTML = sum;
   return sum;
 }
 
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
-  display.innerHTML = sum;
+  //   displayValue = sum;
+  displayValue.push(sum);
+  //   display.innerHTML = sum;
   return sum;
+}
+
+function runningTotal() {
+  let total = displayValue.reduce((acc, currentVal) => {
+    return acc + currentVal;
+  }, 0);
+  return total;
 }
 
 displayWindow();
