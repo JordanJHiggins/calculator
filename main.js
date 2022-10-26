@@ -46,8 +46,10 @@ function displayWindow() {
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
   displayValue.push(sum);
+
   numberclear();
-  runningTotalAdd();
+  leftNumber = sum;
+  runningTotal();
   return sum;
 }
 
@@ -55,7 +57,8 @@ function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
   displayValue.push(sum);
   numberclear();
-  runningTotalSub();
+  leftNumber = sum;
+  runningTotal();
   return sum;
 }
 
@@ -63,52 +66,42 @@ function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
   displayValue.push(sum);
   numberclear();
-  runningTotalMulti();
+  leftNumber = sum;
+  runningTotal();
   return sum;
-  //   displayValue = sum;
-  //   display.innerHTML = sum;
 }
 
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
   displayValue.push(sum);
   numberclear();
-  runningTotalDivd();
+  leftNumber = sum;
+  runningTotal();
   return sum;
 }
 
 // Helper functions
 
-function runningTotalAdd() {
+function runningTotal() {
   // use switch case or object to change operator?
-  const total = displayValue.reduce((acc, currentVal) => {
-    return acc + currentVal;
+  let total = displayValue.reduce((acc, currentVal) => {
+    switch (operator) {
+      case "+":
+        acc + currentVal;
+        break;
+      case "-":
+        acc - currentVal;
+        break;
+      case "x":
+        acc * currentVal;
+        break;
+    }
+    return acc;
   }, 0);
   return total;
 }
 
-function runningTotalSub() {
-  // use switch case or object to change operator?
-  const total = displayValue.reduce((acc, currentVal) => {
-    return acc - currentVal;
-  });
-  return total;
-}
-
-function runningTotalMulti() {
-  // use switch case or object to change operator?
-  const total = displayValue.reduce((acc, currentVal) => {
-    return acc * currentVal;
-  }, 1);
-  return total;
-}
-function runningTotalDivd() {
-  // use switch case or object to change operator?
-  const total = displayValue.reduce((acc, currentVal) => {
-    return acc / currentVal;
-  });
-  return total;
-}
+// return total;
 
 function numberclear() {
   // Should this function also clear the display? or seperate function
