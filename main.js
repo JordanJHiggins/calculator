@@ -45,48 +45,73 @@ function displayWindow() {
 
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
-  //   displayValue = sum;
   displayValue.push(sum);
-  //   display.innerHTML = sum;
   numberclear();
+  runningTotalAdd();
   return sum;
 }
 
 function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
-  //   displayValue = sum;
   displayValue.push(sum);
-  //   display.innerHTML = sum;
   numberclear();
+  runningTotalSub();
   return sum;
 }
 
 function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
-  //   displayValue = sum;
   displayValue.push(sum);
-  //   display.innerHTML = sum;
   numberclear();
+  runningTotalMulti();
   return sum;
+  //   displayValue = sum;
+  //   display.innerHTML = sum;
 }
 
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
-  //   displayValue = sum;
   displayValue.push(sum);
-  //   display.innerHTML = sum;
   numberclear();
+  runningTotalDivd();
   return sum;
 }
 
-function runningTotal() {
-  let total = displayValue.reduce((acc, currentVal) => {
+// Helper functions
+
+function runningTotalAdd() {
+  // use switch case or object to change operator?
+  const total = displayValue.reduce((acc, currentVal) => {
     return acc + currentVal;
   }, 0);
   return total;
 }
 
+function runningTotalSub() {
+  // use switch case or object to change operator?
+  const total = displayValue.reduce((acc, currentVal) => {
+    return acc - currentVal;
+  });
+  return total;
+}
+
+function runningTotalMulti() {
+  // use switch case or object to change operator?
+  const total = displayValue.reduce((acc, currentVal) => {
+    return acc * currentVal;
+  }, 1);
+  return total;
+}
+function runningTotalDivd() {
+  // use switch case or object to change operator?
+  const total = displayValue.reduce((acc, currentVal) => {
+    return acc / currentVal;
+  });
+  return total;
+}
+
 function numberclear() {
+  // Should this function also clear the display? or seperate function
   leftNumber = 0;
   rightNumber = 0;
 }
