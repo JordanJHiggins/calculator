@@ -6,50 +6,50 @@ const operationButtons = document.querySelector(".operationButtonContainer");
 const operateButton = document.querySelector(".operateButtonContainer");
 
 let displayValue = [0];
+// let operatorConditions = ["+", "-", "x", "/"];
 let leftNumber = 0;
 let operator = "";
 let rightNumber = 0;
 
 function displayWindow() {
   // Move into seperate functions?
+
   numberButtons.addEventListener("click", (event) => {
     if (operator.length === 0) {
-      leftNumber += event.target.value;
+      leftNumber += Number(event.target.value);
       display.append(event.target.value);
+      displayValue.push(leftNumber);
     } else if (operator.length > 0) {
-      rightNumber += event.target.value;
+      rightNumber += Number(event.target.value);
       display.append(event.target.value);
+      displayValue.push(rightNumber);
     }
   });
 
   operationButtons.addEventListener("click", (event) => {
     operator = event.target.value;
     display.append(event.target.value);
+    displayValue.push(operator);
+  });
+  // include in one event listener?
+  operationButtons.addEventListener("click", () => {
+    operate();
   });
 
   operateButton.addEventListener("click", () => {
-    switch (operator) {
-      case "+":
-        return add(leftNumber, rightNumber);
-      case "-":
-        return subtract(leftNumber, rightNumber);
-      case "x":
-        return multiply(leftNumber, rightNumber);
-      case "÷":
-        return divide(leftNumber, rightNumber);
-    }
+    operate();
   });
 }
-
+displayWindow();
 // Math operations
 
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
   displayValue.push(sum);
-
+  leftNumber = sum;
   numberclear();
   leftNumber = sum;
-  runningTotal();
+
   return sum;
 }
 
@@ -58,7 +58,7 @@ function subtract(numOne, numTwo) {
   displayValue.push(sum);
   numberclear();
   leftNumber = sum;
-  runningTotal();
+
   return sum;
 }
 
@@ -67,7 +67,7 @@ function multiply(numOne, numTwo) {
   displayValue.push(sum);
   numberclear();
   leftNumber = sum;
-  runningTotal();
+
   return sum;
 }
 
@@ -76,37 +76,35 @@ function divide(numOne, numTwo) {
   displayValue.push(sum);
   numberclear();
   leftNumber = sum;
-  runningTotal();
+
   return sum;
 }
 
 // Helper functions
 
-function runningTotal() {
-  // use switch case or object to change operator?
-  let total = displayValue.reduce((acc, currentVal) => {
-    switch (operator) {
-      case "+":
-        acc + currentVal;
-        break;
-      case "-":
-        acc - currentVal;
-        break;
-      case "x":
-        acc * currentVal;
-        break;
-    }
-    return acc;
-  }, 0);
-  return total;
-}
+// function multiOps() {
+//   if (
+//     console.log(operatorConditions.some((i) => displayValue.includes(i, -1)))
+//   ) {
+//     operate();
+//   }
+// }
 
-// return total;
+function operate() {
+  switch (operator) {
+    case "+":
+      return add(leftNumber, rightNumber);
+    case "-":
+      return subtract(leftNumber, rightNumber);
+    case "x":
+      return multiply(leftNumber, rightNumber);
+    case "÷":
+      return divide(leftNumber, rightNumber);
+  }
+}
 
 function numberclear() {
   // Should this function also clear the display? or seperate function
   leftNumber = 0;
   rightNumber = 0;
 }
-
-displayWindow();
