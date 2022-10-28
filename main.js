@@ -6,7 +6,7 @@ const operationButtons = document.querySelector(".operationButtonContainer");
 const operateButton = document.querySelector(".operateButtonContainer");
 
 let displayValue = [0];
-// let operatorConditions = ["+", "-", "x", "/"];
+let operatorConditions = ["+", "-", "x", "/"];
 let leftNumber = 0;
 let operator = "";
 let rightNumber = 0;
@@ -16,11 +16,11 @@ function displayWindow() {
 
   numberButtons.addEventListener("click", (event) => {
     if (operator.length === 0) {
-      leftNumber += Number(event.target.value);
+      leftNumber += event.target.value;
       display.append(event.target.value);
       displayValue.push(leftNumber);
     } else if (operator.length > 0) {
-      rightNumber += Number(event.target.value);
+      rightNumber += event.target.value;
       display.append(event.target.value);
       displayValue.push(rightNumber);
     }
@@ -46,7 +46,7 @@ displayWindow();
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
   displayValue.push(sum);
-  leftNumber = sum;
+
   numberclear();
   leftNumber = sum;
 
@@ -82,13 +82,13 @@ function divide(numOne, numTwo) {
 
 // Helper functions
 
-// function multiOps() {
-//   if (
-//     console.log(operatorConditions.some((i) => displayValue.includes(i, -1)))
-//   ) {
-//     operate();
-//   }
-// }
+function multiOps() {
+  if (
+    console.log(operatorConditions.some((i) => displayValue.includes(i, -1)))
+  ) {
+    operate();
+  }
+}
 
 function operate() {
   switch (operator) {
