@@ -17,6 +17,7 @@ function displayWindow() {
   numberButtons.addEventListener("click", (event) => {
     if (operator.length === 0) {
       leftNumber += event.target.value;
+
       display.append(event.target.value);
       displayValue.push(leftNumber);
     } else if (operator.length > 0) {
@@ -33,7 +34,7 @@ function displayWindow() {
   });
   // include in one event listener?
   operationButtons.addEventListener("click", () => {
-    operate();
+    multiOps();
   });
 
   operateButton.addEventListener("click", () => {
@@ -84,7 +85,8 @@ function divide(numOne, numTwo) {
 
 function multiOps() {
   if (
-    console.log(operatorConditions.some((i) => displayValue.includes(i, -1)))
+    operatorConditions.some((i) => displayValue.includes(i, -1)) &&
+    rightNumber != 0
   ) {
     operate();
   }
