@@ -4,6 +4,7 @@ const display = document.querySelector(".display");
 const numberButtons = document.querySelector(".numButtonsContainer");
 const operationButtons = document.querySelector(".operationButtonContainer");
 const operateButton = document.querySelector(".operateButtonContainer");
+const allClearButton = document.querySelector(".allClear");
 
 let displayValue = [0];
 let operatorConditions = ["+", "-", "x", "÷"];
@@ -41,15 +42,22 @@ function displayWindow() {
   operateButton.addEventListener("click", () => {
     console.log(operate(operator));
   });
+
+  allClearButton.addEventListener("click", () => {
+    display.innerText = "";
+    leftNumber = 0;
+    operator = "";
+  });
 }
 displayWindow();
+
 // Math operations
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
   displayValue.push(sum);
-
-  numberclear();
+  numberClear();
   leftNumber = sum;
+  display.append(sum);
 
   return sum;
 }
@@ -57,7 +65,7 @@ function add(numOne, numTwo) {
 function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
   displayValue.push(sum);
-  numberclear();
+  numberClear();
   leftNumber = sum;
 
   return sum;
@@ -66,7 +74,7 @@ function subtract(numOne, numTwo) {
 function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
   displayValue.push(sum);
-  numberclear();
+  numberClear();
   leftNumber = sum;
 
   return sum;
@@ -75,14 +83,13 @@ function multiply(numOne, numTwo) {
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
   displayValue.push(sum);
-  numberclear();
+  numberClear();
   leftNumber = sum;
 
   return sum;
 }
 
 // Helper functions
-
 function multiOps() {
   let multiOpsResult = null;
 
@@ -108,7 +115,7 @@ function operate(operator) {
   }
 }
 
-function numberclear() {
+function numberClear() {
   // Should this function also clear the display? or seperate function
   leftNumber = 0;
   rightNumber = 0;
