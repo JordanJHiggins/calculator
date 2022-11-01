@@ -1,0 +1,38 @@
+body {
+  background-color: #16453b;
+}
+button {
+  background-color: #6497b0;
+  border: none;
+  color: beige;
+}
+
+.allClear {
+  background-color: #16445e;
+}
+
+.divide,
+.multiply,
+.subtract,
+.add,
+.operate {
+  background-color: #49c582;
+}
+
+.numberButton {
+  background-color: #216891;
+}
+
+.display {
+  background-color: #1c5678;
+  height: 75px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.calculator-frame {
+  width: 250px;
+  height: 375px;
+  background-color: #24719e;
+  border-radius: 15px;
+}
