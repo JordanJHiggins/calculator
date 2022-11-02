@@ -9,27 +9,37 @@
     <title>Calculator</title>
   </head>
   <body>
-    <div class="display"></div>
+    <div class="calculator-frame">
+      <div class="display"></div>
 
-    <div class="numButtonsContainer">
-      <button value="7" class="seven">7</button>
-      <button value="8" class="eight">8</button>
-      <button value="9" class="nine">9</button>
-      <button value="4" class="four">4</button>
-      <button value="5" class="five">5</button>
-      <button value="6" class="six">6</button>
-      <button value="1" class="one">1</button>
-      <button value="2" class="two">2</button>
-      <button value="3" class="three">3</button>
-    </div>
-    <div class="operationButtonContainer">
-      <button value="÷" class="divide">÷</button>
-      <button value="x" class="multiply">x</button>
-      <button value="-" class="subtract">-</button>
-      <button value="+" class="add">+</button>
-    </div>
-    <div class="operateButtonContainer">
-      <button value="=" class="operate">=</button>
+      <div calculator-keys>
+        <div class="number-buttons">
+          <button value="7" class="number-button">7</button>
+          <button value="8" class="number-button">8</button>
+          <button value="9" class="number-button">9</button>
+          <button value="4" class="number-button">4</button>
+          <button value="5" class="number-button">5</button>
+          <button value="6" class="number-button">6</button>
+          <button value="1" class="number-button">1</button>
+          <button value="2" class="number-button">2</button>
+          <button value="3" class="number-button">3</button>
+          <button value="0" class="number-button">0</button>
+          <button value="." class="number-button">.</button>
+        </div>
+
+        <div class="operation-buttons">
+          <button value="÷" class="divide">÷</button>
+          <button value="x" class="multiply">x</button>
+          <button value="-" class="subtract">-</button>
+          <button value="+" class="add">+</button>
+        </div>
+
+        <div class="operate-button">
+          <button value="=" class="operate">=</button>
+        </div>
+
+        <button class="all-clear">AC</button>
+      </div>
     </div>
   </body>
 </html>
