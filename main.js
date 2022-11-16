@@ -1,10 +1,11 @@
 // display
 const display = document.querySelector(".display");
 // containers
-const numberButtons = document.querySelector(".numButtonsContainer");
-const operationButtons = document.querySelector(".operationButtonContainer");
-const operateButton = document.querySelector(".operateButtonContainer");
-const allClearButton = document.querySelector(".allClear");
+const calculatorKeys = document.querySelector(".calculator-keys");
+// const numberButtons = document.querySelector(".number-buttons");
+// const operationButtons = document.querySelector(".operation-buttons");
+// const operateButton = document.querySelector(".operate-button");
+// const allClearButton = document.querySelector(".all-clear");
 
 let displayValue = [0];
 let operatorConditions = ["+", "-", "x", "÷"];
@@ -14,48 +15,74 @@ let previousOperator = [];
 let rightNumber = 0;
 
 function displayWindow() {
-  // Move into seperate functions?
-
-  numberButtons.addEventListener("click", (event) => {
-    if (operator.length === 0) {
-      leftNumber += event.target.value;
+  calculatorKeys.addEventListener("click", (event) => {
+    const isButton = event.target.nodeName === "BUTTON";
+    let currentValue = event.target.value;
+    if (!isButton) {
+      return;
+    } else if (event.target.classList.contains("number-button")) {
+      if (operator.length === 0) {
+        leftNumber += event.target.value;
+        display.append(event.target.value);
+        displayValue.push(leftNumber);
+      } else if (operator.length > 0) {
+        rightNumber += event.target.value;
+        display.append(event.target.value);
+        displayValue.push(rightNumber);
+      }
+    } else if (event.target.classList.contains("operator")) {
+      operator = event.target.value;
       display.append(event.target.value);
-      displayValue.push(leftNumber);
-    } else if (operator.length > 0) {
-      rightNumber += event.target.value;
-      display.append(event.target.value);
-      displayValue.push(rightNumber);
+      displayValue.push(operator);
+      previousOperator.unshift(operator);
+      multiOps();
+    } else if (event.target.classList.contains("operate")) {
+      operate(operator);
+    } else if (event.target.classList.contains("all-clear")) {
+      display.innerText = "";
+      leftNumber = 0;
+      operator = "";
     }
   });
 
-  operationButtons.addEventListener("click", (event) => {
-    operator = event.target.value;
-    display.append(event.target.value);
-    displayValue.push(operator);
-    previousOperator.unshift(operator);
-  });
-  // include in one event listener?
-  operationButtons.addEventListener("click", () => {
-    console.log(multiOps());
-  });
-
-  operateButton.addEventListener("click", () => {
-    console.log(operate(operator));
-  });
-
-  allClearButton.addEventListener("click", () => {
-    display.innerText = "";
-    leftNumber = 0;
-    operator = "";
-  });
+  // numberButtons.addEventListener("click", (event) => {
+  //   if (operator.length === 0) {
+  //     leftNumber += event.target.value;
+  //     display.append(event.target.value);
+  //     displayValue.push(leftNumber);
+  //   } else if (operator.length > 0) {
+  //     rightNumber += event.target.value;
+  //     display.append(event.target.value);
+  //     displayValue.push(rightNumber);
+  //   }
+  // });
+  // operationButtons.addEventListener("click", (event) => {
+  //   operator = event.target.value;
+  //   display.append(event.target.value);
+  //   displayValue.push(operator);
+  //   previousOperator.unshift(operator);
+  // });
+  // // include in one event listener?
+  // operationButtons.addEventListener("click", () => {
+  //   console.log(multiOps());
+  // });
+  // operateButton.addEventListener("click", () => {
+  //   console.log(operate(operator));
+  // });
+  // allClearButton.addEventListener("click", () => {
+  //   display.innerText = "";
+  //   leftNumber = 0;
+  //   operator = "";
+  // });
 }
 displayWindow();
 
 // Math operations
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
+  // Move this code for each operation to seperate function
   displayValue.push(sum);
-  numberClear();
+  updateDisplay();
   leftNumber = sum;
   display.append(sum);
 
@@ -65,8 +92,9 @@ function add(numOne, numTwo) {
 function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
   displayValue.push(sum);
-  numberClear();
+  updateDisplay();
   leftNumber = sum;
+  display.append(sum);
 
   return sum;
 }
@@ -74,18 +102,18 @@ function subtract(numOne, numTwo) {
 function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
   displayValue.push(sum);
-  numberClear();
+  updateDisplay();
   leftNumber = sum;
-
+  display.append(sum);
   return sum;
 }
 
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
   displayValue.push(sum);
-  numberClear();
+  updateDisplay();
   leftNumber = sum;
-
+  display.append(sum);
   return sum;
 }
 
@@ -99,6 +127,7 @@ function multiOps() {
   ) {
     multiOpsResult = operate(previousOperator[1]);
   }
+
   return multiOpsResult;
 }
 
@@ -115,8 +144,9 @@ function operate(operator) {
   }
 }
 
-function numberClear() {
-  // Should this function also clear the display? or seperate function
+function updateDisplay() {
   leftNumber = 0;
   rightNumber = 0;
+
+  display.innerHTML = "";
 }
