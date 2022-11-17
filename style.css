@@ -22,36 +22,53 @@ body {
 }
 button {
   background-color: #6497b0;
-  border: none;
   color: beige;
+  border: solid 0.5px #1c5678;
+  /* width: 80px; */
+  height: 75px;
 }
 
+button:hover {
+  background-color: grey;
+}
+
+.calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.zero {
+  grid-column: span 2;
+}
 .all-clear {
   background-color: #16445e;
+  grid-column: span 2;
 }
-
-.divide,
-.multiply,
-.subtract,
-.add,
+.delete {
+  background-color: #16445e;
+}
+.operator,
 .operate {
   background-color: #49c582;
 }
 
-.number-button {
-  background-color: #216891;
-}
-
 .display {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  color: beige;
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: #1c5678;
-  height: 75px;
+  height: 100px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  padding-right: 10px;
 }
 
 .calculator-frame {
-  width: 250px;
-  height: 375px;
+  overflow: hidden;
+  width: 350px;
   background-color: #24719e;
   border-radius: 15px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

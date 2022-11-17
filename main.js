@@ -1,81 +1,41 @@
-// display
 const display = document.querySelector(".display");
-// containers
 const calculatorKeys = document.querySelector(".calculator-keys");
-// const numberButtons = document.querySelector(".number-buttons");
-// const operationButtons = document.querySelector(".operation-buttons");
-// const operateButton = document.querySelector(".operate-button");
-// const allClearButton = document.querySelector(".all-clear");
 
 let displayValue = [0];
 let operatorConditions = ["+", "-", "x", "÷"];
-let leftNumber = 0;
 let operator = [];
 let previousOperator = [];
+let leftNumber = 0;
 let rightNumber = 0;
 
-function displayWindow() {
-  calculatorKeys.addEventListener("click", (event) => {
-    const isButton = event.target.nodeName === "BUTTON";
-    let currentValue = event.target.value;
-    if (!isButton) {
-      return;
-    } else if (event.target.classList.contains("number-button")) {
-      if (operator.length === 0) {
-        leftNumber += event.target.value;
-        display.append(event.target.value);
-        displayValue.push(leftNumber);
-      } else if (operator.length > 0) {
-        rightNumber += event.target.value;
-        display.append(event.target.value);
-        displayValue.push(rightNumber);
-      }
-    } else if (event.target.classList.contains("operator")) {
-      operator = event.target.value;
+calculatorKeys.addEventListener("click", (event) => {
+  const isButton = event.target.nodeName === "BUTTON";
+  if (!isButton) {
+    return;
+  } else if (event.target.classList.contains("number-button")) {
+    if (operator.length != 0) {
+      rightNumber += event.target.value;
       display.append(event.target.value);
-      displayValue.push(operator);
-      previousOperator.unshift(operator);
-      multiOps();
-    } else if (event.target.classList.contains("operate")) {
-      operate(operator);
-    } else if (event.target.classList.contains("all-clear")) {
-      display.innerText = "";
-      leftNumber = 0;
-      operator = "";
+      displayValue.push(rightNumber);
+    } else {
+      leftNumber += event.target.value;
+      display.append(event.target.value);
+      displayValue.push(leftNumber);
     }
-  });
-
-  // numberButtons.addEventListener("click", (event) => {
-  //   if (operator.length === 0) {
-  //     leftNumber += event.target.value;
-  //     display.append(event.target.value);
-  //     displayValue.push(leftNumber);
-  //   } else if (operator.length > 0) {
-  //     rightNumber += event.target.value;
-  //     display.append(event.target.value);
-  //     displayValue.push(rightNumber);
-  //   }
-  // });
-  // operationButtons.addEventListener("click", (event) => {
-  //   operator = event.target.value;
-  //   display.append(event.target.value);
-  //   displayValue.push(operator);
-  //   previousOperator.unshift(operator);
-  // });
-  // // include in one event listener?
-  // operationButtons.addEventListener("click", () => {
-  //   console.log(multiOps());
-  // });
-  // operateButton.addEventListener("click", () => {
-  //   console.log(operate(operator));
-  // });
-  // allClearButton.addEventListener("click", () => {
-  //   display.innerText = "";
-  //   leftNumber = 0;
-  //   operator = "";
-  // });
-}
-displayWindow();
+  } else if (event.target.classList.contains("operator")) {
+    operator = event.target.value;
+    display.append(event.target.value);
+    displayValue.push(operator);
+    previousOperator.unshift(operator);
+    multiOps();
+  } else if (event.target.classList.contains("operate")) {
+    operate(operator);
+  } else if (event.target.classList.contains("all-clear")) {
+    display.innerText = "";
+    leftNumber = 0;
+    operator = "";
+  }
+});
 
 // Math operations
 function add(numOne, numTwo) {
