@@ -3,4 +3,4 @@ A calculator project made with HTML, CSS and Javascript. The layout was made wit
 
 This is a working example with additional features, optimization and bug fixes to be added. 
 
-Live link: 
+Live link: https://jordanjhiggins.github.io/calculator/
