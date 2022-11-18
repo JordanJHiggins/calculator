@@ -1,88 +1,91 @@
 const display = document.querySelector(".display");
 const calculatorKeys = document.querySelector(".calculator-keys");
+const deleteButton = document.querySelector(".delete");
 
-let displayValue = [0];
+let currentOperation = [0];
 let operatorConditions = ["+", "-", "x", "÷"];
-let operator = [];
+let currentOperator = [];
 let previousOperator = [];
 let leftNumber = 0;
 let rightNumber = 0;
 
 calculatorKeys.addEventListener("click", (event) => {
   const isButton = event.target.nodeName === "BUTTON";
-  if (!isButton) {
-    return;
-  } else if (event.target.classList.contains("number-button")) {
-    if (operator.length != 0) {
+  if (!isButton) return;
+
+  if (event.target.classList.contains("number-button")) {
+    if (currentOperator.length != 0) {
       rightNumber += event.target.value;
       display.append(event.target.value);
-      displayValue.push(rightNumber);
+      currentOperation.push(rightNumber);
     } else {
       leftNumber += event.target.value;
       display.append(event.target.value);
-      displayValue.push(leftNumber);
+      currentOperation.push(leftNumber);
     }
-  } else if (event.target.classList.contains("operator")) {
-    operator = event.target.value;
+  }
+
+  if (event.target.classList.contains("currentOperator")) {
+    currentOperator = event.target.value;
     display.append(event.target.value);
-    displayValue.push(operator);
-    previousOperator.unshift(operator);
+    currentOperation.push(currentOperator);
+    previousOperator.unshift(currentOperator);
     multiOps();
-  } else if (event.target.classList.contains("operate")) {
-    operate(operator);
-  } else if (event.target.classList.contains("all-clear")) {
+  }
+
+  if (event.target.classList.contains("operate")) {
+    operate(currentOperator);
+  }
+
+  if (event.target.classList.contains("all-clear")) {
     display.innerText = "";
     leftNumber = 0;
-    operator = "";
+    currentOperator = "";
+  }
+
+  if (event.target.classList.contains("delete")) {
+    del();
   }
 });
 
 // Math operations
 function add(numOne, numTwo) {
   let sum = Number(numOne) + Number(numTwo);
-  // Move this code for each operation to seperate function
-  displayValue.push(sum);
   updateDisplay();
-  leftNumber = sum;
-  display.append(sum);
+  updateValues(sum);
 
   return sum;
 }
 
 function subtract(numOne, numTwo) {
   let sum = Number(numOne) - Number(numTwo);
-  displayValue.push(sum);
   updateDisplay();
-  leftNumber = sum;
-  display.append(sum);
+  updateValues(sum);
 
   return sum;
 }
 
 function multiply(numOne, numTwo) {
   let sum = Number(numOne) * Number(numTwo);
-  displayValue.push(sum);
   updateDisplay();
-  leftNumber = sum;
-  display.append(sum);
+  updateValues(sum);
+
   return sum;
 }
 
 function divide(numOne, numTwo) {
   let sum = Number(numOne) / Number(numTwo);
-  displayValue.push(sum);
   updateDisplay();
-  leftNumber = sum;
-  display.append(sum);
+  updateValues(sum);
+
   return sum;
 }
 
 // Helper functions
 function multiOps() {
   let multiOpsResult = null;
-
   if (
-    operatorConditions.some((i) => displayValue.includes(i, -1)) &&
+    operatorConditions.some((i) => currentOperation.includes(i, -1)) &&
     rightNumber != 0
   ) {
     multiOpsResult = operate(previousOperator[1]);
@@ -91,8 +94,8 @@ function multiOps() {
   return multiOpsResult;
 }
 
-function operate(operator) {
-  switch (operator) {
+function operate(currentOperator) {
+  switch (currentOperator) {
     case "+":
       return add(leftNumber, rightNumber);
     case "-":
@@ -107,6 +110,11 @@ function operate(operator) {
 function updateDisplay() {
   leftNumber = 0;
   rightNumber = 0;
-
   display.innerHTML = "";
+}
+
+function updateValues(sum) {
+  currentOperation.push(sum);
+  leftNumber = sum;
+  display.append(sum);
 }
