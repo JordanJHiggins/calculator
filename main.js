@@ -74,6 +74,11 @@ function multiply(numOne, numTwo) {
 }
 
 function divide(numOne, numTwo) {
+  if (numTwo == 00) {
+    updateDisplay();
+    display.append("Not a number");
+    return;
+  }
   let sum = Number(numOne) / Number(numTwo);
   updateDisplay();
   updateValues(sum);
