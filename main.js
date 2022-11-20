@@ -94,6 +94,7 @@ function multiOps() {
     rightNumber != 0
   ) {
     multiOpsResult = operate(previousOperator[1]);
+    display.append(currentOperator);
   }
 
   return multiOpsResult;
