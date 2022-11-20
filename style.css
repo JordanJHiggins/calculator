@@ -27,7 +27,10 @@ button {
   font-size: 20px;
   height: 75px;
 }
-
+p {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
 button:active {
   background-color: powderblue;
 }
@@ -66,6 +69,7 @@ button:active {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding-right: 10px;
+  padding-left: 10px;
 }
 
 .calculator-frame {
@@ -77,4 +81,22 @@ button:active {
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
     rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
     rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: center;
+  gap: 20px;
+  position: fixed;
+  background-color: #49c582;
+  width: 100vw;
+  height: 5vh;
+}
+.github-logo {
+  transition: transform 0.5s ease-in-out;
+}
+.github-logo:hover {
+  transform: rotate(360deg);
 }
