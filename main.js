@@ -10,9 +10,9 @@ let leftNumber = 0;
 let rightNumber = 0;
 
 calculatorKeys.addEventListener("click", (event) => {
+  // checks if the event target is a button.
   const isButton = event.target.nodeName === "BUTTON";
   if (!isButton) return;
-
   if (event.target.classList.contains("number-button")) {
     if (currentOperator.length != 0) {
       rightNumber += event.target.value;
@@ -30,7 +30,7 @@ calculatorKeys.addEventListener("click", (event) => {
     display.append(event.target.value);
     currentOperation.push(currentOperator);
     previousOperator.unshift(currentOperator);
-    multiOps();
+    multipleOperators();
   }
 
   if (event.target.classList.contains("operate")) {
@@ -87,9 +87,10 @@ function divide(numOne, numTwo) {
 }
 
 // Helper functions
-function multiOps() {
+function multipleOperators() {
   let multiOpsResult = null;
   if (
+    // Checks if an element operatorConditions array is present in the currentOperation array.
     operatorConditions.some((i) => currentOperation.includes(i, -1)) &&
     rightNumber != 0
   ) {
